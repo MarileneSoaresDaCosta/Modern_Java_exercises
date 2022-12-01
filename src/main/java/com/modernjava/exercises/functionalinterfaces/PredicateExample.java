@@ -3,6 +3,7 @@ package com.modernjava.exercises.functionalinterfaces;
 import com.modernjava.exercises.data.Student;
 import com.modernjava.exercises.data.StudentDataBase;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -62,14 +63,32 @@ public class PredicateExample {
             }
         }));
     }
-    public static void main(String[] args) {
-        System.out.println(p.test(4));
-        predicateAnd();
-        predicateOr();
-        predicateNegate();
 
-        filterStudentsByGradeLevel();
-        filterStudentsByGpa();
-        filterStudentsByGradeLevelAndGpa();
+    public static void filterStudents( List<Student> studentsList, Predicate <Student> p) {
+        System.out.println("filterStudents by a parameterized predicate: ");
+        studentsList.forEach((student -> {
+            if (p.test(student)) {
+                System.out.println(student);
+            }
+        }));
+    }
+
+
+    public static void main(String[] args) {
+//        System.out.println(p.test(4));
+//        predicateAnd();
+//        predicateOr();
+//        predicateNegate();
+//
+//        filterStudentsByGradeLevel();
+//        filterStudentsByGpa();
+//        filterStudentsByGradeLevelAndGpa();
+        Predicate<Student> p4 = (Student student) -> student.getGender().equals("female");
+        filterStudents(StudentDataBase.getAllStudents(), p4);
+
+        Predicate<Student> p5 = (Student student) -> student.getActivities().contains("soccer");
+
+        filterStudents(StudentDataBase.getAllStudents(), p4.and(p5));
+
     }
 }

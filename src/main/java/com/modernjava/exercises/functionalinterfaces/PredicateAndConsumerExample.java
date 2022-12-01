@@ -1,4 +1,4 @@
-package com.modernjava.exercises;
+package com.modernjava.exercises.functionalinterfaces;
 
 import com.modernjava.exercises.data.Student;
 import com.modernjava.exercises.data.StudentDataBase;
